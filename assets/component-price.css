@@ -20,10 +20,7 @@
 
 .price .price-item {
   display: inline-block;
-  margin: 0 20px 0 0;
-}
-.price .price-item--last {
-  margin-right: 10px;
+  margin: 0 1rem 0 0;
 }
 
 .price__regular .price-item--regular {
@@ -38,21 +35,17 @@
   .price {
     margin-bottom: 0;
   }
-
-  .price .price-item--last {
-    margin-right: 6px;
-  }
 }
 
 .price--large {
-  font-size: 16px;
-  line-height: 19px;
+  font-size: 1.6rem;
+  line-height: calc(1 + 0.5 / var(--font-body-scale));
+  letter-spacing: 0.13rem;
 }
 
 @media screen and (min-width: 750px) {
   .price--large {
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 1.8rem;
   }
 }
 
@@ -93,18 +86,8 @@
 
 .price--on-sale .price-item--regular {
   text-decoration: line-through;
-  color: #000;
-  font-size: 16px;
-  line-height: 19px;
-  font-weight: 600;
-}
-
-.price--on-sale .price-item--sale {
-  color: var(--color-badge-background);
-}
-
-.price__badge-sale {
-  display: none;
+  color: rgba(var(--color-foreground), 0.75);
+  font-size: 1.3rem;
 }
 
 .unit-price {

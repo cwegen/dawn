@@ -106,7 +106,6 @@
   },
   "products": {
     "product": {
-      "available": "Auf Lager, in 2-3 Tagen bei dir",
       "add_to_cart": "In den Warenkorb legen",
       "description": "Beschreibung",
       "on_sale": "Sale",
@@ -176,9 +175,9 @@
         "price_at_each_html": "bei {{ price }}/Stück"
       },
       "product_variants": "Produktvarianten",
-      "taxes_included": "Inkl. MwSt.",
+      "taxes_included": "Inkl. Steuern.",
       "duties_included": "Inkl. Zollgebühren.",
-      "duties_and_taxes_included": "Inkl. Zollgebühren und MwSt."
+      "duties_and_taxes_included": "Inkl. Zollgebühren und Steuern."
     },
     "modal": {
       "label": "Medien-Galerie"

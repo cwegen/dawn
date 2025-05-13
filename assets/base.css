@@ -5,7 +5,8 @@
   --alpha-badge-border: 0.1;
   --focused-base-outline: 0.2rem solid rgba(var(--color-foreground), 0.5);
   --focused-base-outline-offset: 0.3rem;
-  --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
+  --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
+    0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
 
 .product-card-wrapper .card,
@@ -369,16 +370,16 @@ blockquote {
 }
 
 .caption {
-  font-size: 1rem;
-  letter-spacing: 0.07rem;
-  line-height: calc(1 + 0.7 / var(--font-body-scale));
+  font-size: 10px;
+  line-height: 13px;
+  font-weight: 500;
 }
-
+/* 
 @media screen and (min-width: 750px) {
   .caption {
     font-size: 1.2rem;
   }
-}
+} */
 
 .caption-with-letter-spacing {
   font-size: 1rem;
@@ -1320,15 +1321,14 @@ button.shopify-payment-button__button--unbranded {
 
 shopify-accelerated-checkout {
   --shopify-accelerated-checkout-button-border-radius: var(--buttons-radius-outset);
-  --shopify-accelerated-checkout-button-box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius)
-  rgba(var(--color-shadow), var(--shadow-opacity));
+  --shopify-accelerated-checkout-button-box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
+    var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity));
 }
 shopify-accelerated-checkout-cart {
   --shopify-accelerated-checkout-button-border-radius: var(--buttons-radius-outset);
-  --shopify-accelerated-checkout-button-box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) var(--shadow-blur-radius)
-  rgba(var(--color-shadow), var(--shadow-opacity));
+  --shopify-accelerated-checkout-button-box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset)
+    var(--shadow-blur-radius) rgba(var(--color-shadow), var(--shadow-opacity));
 }
-
 
 /* Button - other */
 

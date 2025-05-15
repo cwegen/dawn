@@ -983,8 +983,12 @@ a.product__text {
   grid-gap: 1rem;
 }
 
-.slider-mobile-gutter {
+.slider-mobile-gutter:first-of-type {
   width: 100%;
+}
+
+.thumbnail-list .slider__slide:first-of-type {
+  display: none;
 }
 
 /* Fix to show some space at the end of our sliders in all browsers to be applied on thumbnails */

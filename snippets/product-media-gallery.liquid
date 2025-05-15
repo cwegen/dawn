@@ -154,12 +154,17 @@
       </button>
     </div>
   </slider-component>
-  {%- assign number_of_slides = recommendations.products_count
-    | plus: 0.0
-    | divided_by: block.settings.products_per_page
-    | ceil
+  {%- liquid
+    assign is_not_limited_to_single_item = false
+    if limit == null or limit > 1
+      assign is_not_limited_to_single_item = true
+    endif
   -%}
-  {%- if number_of_slides > 1 -%}
+  {%- if is_not_limited_to_single_item
+    and media_count > 1
+    and section.settings.gallery_layout contains 'thumbnail'
+    or section.settings.mobile_thumbnails == 'show'
+  -%}
     <div class="slider-buttons">
       <button
         type="button"
@@ -199,12 +204,6 @@
       {{ 'products.product.xr_button' | t }}
     </button>
   {%- endif -%}
-  {%- liquid
-    assign is_not_limited_to_single_item = false
-    if limit == null or limit > 1
-      assign is_not_limited_to_single_item = true
-    endif
-  -%}
   {%- if is_not_limited_to_single_item
     and media_count > 1
     and section.settings.gallery_layout contains 'thumbnail'

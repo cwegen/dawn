@@ -76,6 +76,7 @@ slider-component.slider-component-full-width {
     scroll-padding-left: 1rem;
     -webkit-overflow-scrolling: touch;
     flex-direction: column;
+    margin-right: 20px;
   }
 
   .slider.slider--tablet-up .slider__slide {
@@ -334,15 +335,23 @@ slider-component.slider-component-full-width {
   .slider--mobile + .slider-buttons {
     display: none;
   }
+
+  .slider-buttons {
+    position: absolute;
+    bottom: -28px;
+    left: calc(50% + 21px);
+    gap: 12px;
+  }
 }
 
 .slider-button {
-  color: rgba(var(--color-foreground), 0.75);
+  color: rgba(var(--color-foreground), 0.3);
   background: transparent;
   border: none;
   cursor: pointer;
-  width: 44px;
-  height: 44px;
+  width: 23px;
+  height: 23px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -353,7 +362,7 @@ slider-component.slider-component-full-width {
 }
 
 .slider-button .icon {
-  height: 0.6rem;
+  height: 8px;
 }
 
 .slider-button[disabled] .icon {

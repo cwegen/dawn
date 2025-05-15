@@ -99,7 +99,7 @@
 }
 
 .price--on-sale .price-item--sale {
-  color: var(--color-link);
+  color: rgb(var(--color-link));
   font-weight: 600;
 }
 

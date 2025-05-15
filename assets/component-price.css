@@ -29,9 +29,9 @@
   margin-right: 0;
 }
 
-.price:not(.price--show-badge) .price-item--last:last-of-type {
+/* .price:not(.price--show-badge) .price-item--last:last-of-type {
   margin: 0;
-}
+} */
 
 @media screen and (min-width: 750px) {
   .price {

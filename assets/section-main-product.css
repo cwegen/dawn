@@ -36,7 +36,6 @@ product-info {
   border-radius: 50%;
 }
 
-
 @media screen and (min-width: 750px) {
   .product__column-sticky {
     position: sticky;
@@ -260,7 +259,7 @@ product-info {
 }
 
 .product__text {
-  display: none;
+  margin: 0 0 20px;
 }
 
 a.product__text {
@@ -275,7 +274,7 @@ a.product__text {
 
 .product__title {
   word-break: break-word;
-  margin-bottom: 23px;
+  /* margin-bottom: 23px; */
 }
 
 .product__title h1 {
@@ -398,6 +397,7 @@ a.product__text {
 }
 
 .product__buy-card {
+  width: 100%;
   padding: 26px 20px;
   background-color: #fff;
   border-radius: 5px;
@@ -1253,6 +1253,7 @@ a.product__text {
   font-size: 15px;
   line-height: 19px;
   font-weight: 500;
+  margin: 0;
 }
 
 .product__inventory .svg-wrapper,
@@ -1278,7 +1279,7 @@ a.product__text {
   opacity: 0.3;
 } */
 .product__inventory .icon-inventory-status circle:last-of-type {
-    opacity: 0;
+  opacity: 0;
 }
 
 /* Icon with text */

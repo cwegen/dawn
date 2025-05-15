@@ -38,6 +38,7 @@ product-info {
 
 @media screen and (min-width: 750px) {
   .product__column-sticky {
+    max-height: 475px;
     position: sticky;
     top: 3rem;
     z-index: 2;
@@ -50,7 +51,7 @@ product-info {
   }
 
   .product__info-wrapper {
-    padding: 0 0 0 5rem;
+    margin: 0 0 0 5rem;
   }
 
   .product__info-wrapper--extra-padding {
@@ -260,6 +261,15 @@ product-info {
 
 .product__text {
   margin: 0 0 20px;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+@media screen and (min-width: 750px) {
+  .product__text {
+    font-size: 18px;
+    line-height: 22px;
+  }
 }
 
 a.product__text {
@@ -971,6 +981,10 @@ a.product__text {
 .thumbnail-list {
   flex-wrap: wrap;
   grid-gap: 1rem;
+}
+
+.slider-mobile-gutter {
+  width: 100%;
 }
 
 /* Fix to show some space at the end of our sliders in all browsers to be applied on thumbnails */

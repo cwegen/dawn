@@ -48,6 +48,22 @@
     %}
 
     {% style %}
+        @font-face {
+            font-family: 'Montserrat';
+            src: url('./Montserrat-Medium.ttf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        };
+
+        @font-face {
+            font-family: 'Montserrat';
+            src: url('./Montserrat-SemiBold.ttf') format('opentype');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        };
+
       {{ settings.type_body_font | font_face: font_display: 'swap' }}
       {{ body_font_bold | font_face: font_display: 'swap' }}
       {{ body_font_italic | font_face: font_display: 'swap' }}

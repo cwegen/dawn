@@ -24,12 +24,13 @@ if (!customElements.get('media-gallery')) {
 
         // Add new event listeners for custom buttons
         if (this.customSliderButtons) {
+          console.log(this.elements.viewer);
           this.customSliderButtons
             .querySelectorAll('button[name="previous"], button[name="next"]')
             .forEach((button) => {
               button.addEventListener('click', (event) => {
                 // Use viewer slider's navigation logic
-                if (this.elements.viewer.slider) {
+                if (this.elements.viewer) {
                   this.elements.viewer.slider.onButtonClick(event);
                 }
               });

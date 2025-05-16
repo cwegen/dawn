@@ -832,8 +832,7 @@ class SlideshowComponent extends SliderComponent {
     this.arrowControlWrapper = document.querySelector('.js-slider-buttons');
     this.enableSliderLooping = true;
 
-    if (!this.sliderControlWrapper) return;
-    if (!this.additionalControlWrapper) return;
+    if (!this.sliderControlWrapper || !this.arrowControlWrapper) return;
 
     this.sliderFirstItemNode = this.slider.querySelector('.slideshow__slide');
     if (this.sliderItemsToShow.length > 0) this.currentPage = 1;

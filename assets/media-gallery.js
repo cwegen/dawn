@@ -31,7 +31,7 @@ if (!customElements.get('media-gallery')) {
               button.addEventListener('click', (event) => {
                 // Use viewer slider's navigation logic
                 if (this.elements.viewer) {
-                  this.elements.viewer.HTMLElement.onButtonClick(event);
+                  this.elements.viewer.onButtonClick(event);
                 }
               });
             });

@@ -10,6 +10,9 @@ if (!customElements.get('media-gallery')) {
           thumbnails: this.querySelector('[id^="GalleryThumbnails"]'),
         };
         this.mql = window.matchMedia('(min-width: 750px)');
+
+        this.customSliderButtons = this.querySelector('.js-slider-buttons');
+
         if (!this.elements.thumbnails) return;
 
         this.elements.viewer.addEventListener('slideChanged', debounce(this.onSlideChanged.bind(this), 500));
@@ -18,6 +21,20 @@ if (!customElements.get('media-gallery')) {
             .querySelector('button')
             .addEventListener('click', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
         });
+
+        // Add new event listeners for custom buttons
+        if (this.customSliderButtons) {
+          this.customSliderButtons
+            .querySelectorAll('button[name="previous"], button[name="next"]')
+            .forEach((button) => {
+              button.addEventListener('click', (event) => {
+                // Use viewer slider's navigation logic
+                if (this.elements.viewer.slider) {
+                  this.elements.viewer.slider.onButtonClick(event);
+                }
+              });
+            });
+        }
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
       }
 
@@ -45,7 +62,8 @@ if (!customElements.get('media-gallery')) {
 
           if (this.elements.thumbnails) {
             const activeThumbnail = this.elements.thumbnails.querySelector(`[data-target="${mediaId}"]`);
-            activeThumbnail.parentElement.firstChild !== activeThumbnail && activeThumbnail.parentElement.prepend(activeThumbnail);
+            activeThumbnail.parentElement.firstChild !== activeThumbnail &&
+              activeThumbnail.parentElement.prepend(activeThumbnail);
           }
 
           if (this.elements.viewer.slider) this.elements.viewer.resetPages();

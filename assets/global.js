@@ -829,12 +829,9 @@ class SlideshowComponent extends SliderComponent {
   constructor() {
     super();
     this.sliderControlWrapper = this.querySelector('.slider-buttons');
-    this.arrowControlWrapper = document.querySelector('.js-slider-buttons');
     this.enableSliderLooping = true;
 
-    console.log(this.arrowControlWrapper);
-
-    if (!this.sliderControlWrapper || !this.arrowControlWrapper) return;
+    if (!this.sliderControlWrapper) return;
 
     this.sliderFirstItemNode = this.slider.querySelector('.slideshow__slide');
     if (this.sliderItemsToShow.length > 0) this.currentPage = 1;
@@ -846,10 +843,6 @@ class SlideshowComponent extends SliderComponent {
     this.sliderControlLinksArray = Array.from(this.sliderControlWrapper.querySelectorAll('.slider-counter__link'));
     this.sliderControlLinksArray.forEach((link) => link.addEventListener('click', this.linkToSlide.bind(this)));
     this.slider.addEventListener('scroll', this.setSlideVisibility.bind(this));
-
-    this.arrowControlWrapper.querySelectorAll('button').forEach((button) => {
-      button.addEventListener('click', this.onButtonClick.bind(this));
-    });
     this.setSlideVisibility();
 
     if (this.announcementBarSlider) {
@@ -898,19 +891,15 @@ class SlideshowComponent extends SliderComponent {
     const isFirstSlide = this.currentPage === 1;
     const isLastSlide = this.currentPage === this.sliderItemsToShow.length;
 
-    console.log('isFirstSlide', isFirstSlide);
-    console.log('isLastSlide', isLastSlide);
     if (!isFirstSlide && !isLastSlide) {
       this.applyAnimationToAnnouncementBar(event.currentTarget.name);
       return;
     }
 
     if (isFirstSlide && event.currentTarget.name === 'previous') {
-      console.log('previous');
       this.slideScrollPosition =
         this.slider.scrollLeft + this.sliderFirstItemNode.clientWidth * this.sliderItemsToShow.length;
     } else if (isLastSlide && event.currentTarget.name === 'next') {
-      console.log('next');
       this.slideScrollPosition = 0;
     }
 

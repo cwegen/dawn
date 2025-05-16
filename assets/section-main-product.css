@@ -988,7 +988,7 @@ a.product__text {
   width: 100%;
 }
 
-.thumbnail-list .slider__slide[aria-current] {
+.slider__slide:has(.thumbnail[aria-current]) {
   display: none;
 }
 

@@ -896,15 +896,19 @@ class SlideshowComponent extends SliderComponent {
     const isFirstSlide = this.currentPage === 1;
     const isLastSlide = this.currentPage === this.sliderItemsToShow.length;
 
+    console.log('isFirstSlide', isFirstSlide);
+    console.log('isLastSlide', isLastSlide);
     if (!isFirstSlide && !isLastSlide) {
       this.applyAnimationToAnnouncementBar(event.currentTarget.name);
       return;
     }
 
     if (isFirstSlide && event.currentTarget.name === 'previous') {
+      console.log('previous');
       this.slideScrollPosition =
         this.slider.scrollLeft + this.sliderFirstItemNode.clientWidth * this.sliderItemsToShow.length;
     } else if (isLastSlide && event.currentTarget.name === 'next') {
+      console.log('next');
       this.slideScrollPosition = 0;
     }
 

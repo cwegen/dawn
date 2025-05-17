@@ -360,12 +360,8 @@ slider-component.slider-component-full-width {
   justify-content: center;
 }
 
-.slider-button:hover {
-  color: rgb(var(--color-secondary-button-text));
-}
-
 .slider-button:not([disabled]):hover {
-  color: rgb(var(--color-foreground));
+  color: rgb(var(--color-secondary-button-text));
 }
 
 .slider-button .icon {

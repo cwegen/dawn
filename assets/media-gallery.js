@@ -118,12 +118,8 @@ if (!customElements.get('media-gallery')) {
         // Handle the previous and next buttons state
         const prevMedia = this.findPreviousId(mediaId);
         const nextMedia = this.findNextId(mediaId);
-        console.log('prevMedia', prevMedia);
-        console.log('nextMedia', nextMedia);
-        console.log(this.previousButton);
-        console.log(this.nextButton);
-        this.previousButton && prevMedia ? null : (this.previousButton.disabled = false);
-        this.nextButton && nextMedia ? null : (this.nextButton.disabled = false);
+        this.previousButton && prevMedia ? null : (this.previousButton.disabled = true);
+        this.nextButton && nextMedia ? null : (this.nextButton.disabled = true);
 
         this.elements.viewer.querySelectorAll('[data-media-id]').forEach((element) => {
           element.classList.remove('is-active');

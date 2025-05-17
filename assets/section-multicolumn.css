@@ -28,7 +28,7 @@
 
 @media screen and (max-width: 749px) {
   .multicolumn .page-width {
-    padding-top: 30px;
+    padding-top: 0;
   }
 }
 

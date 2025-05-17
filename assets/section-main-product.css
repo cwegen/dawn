@@ -42,9 +42,10 @@ product-info {
   border-radius: 50%;
 }
 
-@media screen and (max-width: 1040px) {
-  .product__column-sticky {
-    max-height: 475px;
+@media screen and (max-width: 749px) {
+  .product__info-wrapper {
+    margin-top: 0.5rem;
+    padding-bottom: 2rem;
   }
 }
 
@@ -55,6 +56,7 @@ product-info {
     z-index: 2;
     display: flex;
     flex-direction: row-reverse;
+    max-height: 475px;
   }
 
   .product--thumbnail .thumbnail-list {
@@ -83,6 +85,12 @@ product-info {
 
   .product--right .product__media-wrapper {
     order: 2;
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .product__column-sticky {
+    max-height: unset;
   }
 }
 

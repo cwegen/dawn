@@ -26,9 +26,9 @@ if (!customElements.get('media-gallery')) {
           // init custom buttons
           this.previousButton = this.customSliderButtons.querySelector('button[name="previous"]');
           this.nextButton = this.customSliderButtons.querySelector('button[name="next"]');
-          this.previousButton.disabled = true;
+          this.previousButton.setAttribute('disabled', 'disabled');
           if (this.elements.viewer.sliderItems.length === 1) {
-            this.nextButton.disabled = true;
+            this.nextButton.setAttribute('disabled', 'disabled');
           }
 
           this.previousButton.addEventListener('click', () => {
@@ -119,9 +119,11 @@ if (!customElements.get('media-gallery')) {
         const prevMedia = this.findPreviousId(mediaId);
         const nextMedia = this.findNextId(mediaId);
         this.previousButton && prevMedia
-          ? (this.previousButton.disabled = false)
-          : (this.previousButton.disabled = true);
-        this.nextButton && nextMedia ? (this.nextButton.disabled = false) : (this.nextButton.disabled = true);
+          ? this.previousButton.removeAttribute('disabled')
+          : this.previousButton.setAttribute('disabled', 'disabled');
+        this.nextButton && nextMedia
+          ? this.nextButton.removeAttribute('disabled')
+          : this.nextButton.setAttribute('disabled', 'disabled');
 
         this.elements.viewer.querySelectorAll('[data-media-id]').forEach((element) => {
           element.classList.remove('is-active');

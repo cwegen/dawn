@@ -27,9 +27,10 @@ if (!customElements.get('media-gallery')) {
           this.previousButton = this.customSliderButtons.querySelector('button[name="previous"]');
           this.nextButton = this.customSliderButtons.querySelector('button[name="next"]');
           this.previousButton.disabled = true;
-          if (this.element.viewer.sliderItems.length === 1) {
+          if (this.elements.viewer.sliderItems.length === 1) {
             this.nextButton.disabled = true;
           }
+
           this.previousButton.addEventListener('click', () => {
             const previousId = this.findPreviousId();
             if (previousId) {

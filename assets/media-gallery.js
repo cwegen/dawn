@@ -37,7 +37,7 @@ if (!customElements.get('media-gallery')) {
             const previousId = this.findPreviousId();
             console.log('Previous ID:', previousId);
             if (previousId) {
-              this.setActiveMedia.bind(this, previousId, false);
+              this.setActiveMedia(previousId, false);
               // Disable the previous button if there is no previous media after clicking
               if (!this.findPreviousId(previousId)) {
                 this.previousButton.disabled = true;
@@ -51,7 +51,7 @@ if (!customElements.get('media-gallery')) {
             const nextId = this.findNextId();
             console.log('Next ID:', nextId);
             if (nextId) {
-              this.setActiveMedia.bind(this, nextId, false);
+              this.setActiveMedia(nextId, false);
               // Disable the next button if there is no next media after clicking
               if (!this.findNextId(nextId)) {
                 this.nextButton.disabled = true;

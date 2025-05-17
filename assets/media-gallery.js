@@ -22,21 +22,81 @@ if (!customElements.get('media-gallery')) {
             .addEventListener('click', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
         });
 
-        // Add new event listeners for custom buttons
         if (this.customSliderButtons) {
-          console.log(this.elements.viewer);
-          this.customSliderButtons
-            .querySelectorAll('button[name="previous"], button[name="next"]')
-            .forEach((button) => {
-              button.addEventListener('click', (event) => {
-                // Use viewer slider's navigation logic
-                if (this.elements.viewer) {
-                  this.elements.viewer.onButtonClick(event);
-                }
-              });
-            });
+          // init custom buttons
+          this.previousButton = this.customSliderButtons.querySelector('button[name="previous"]');
+          this.nextButton = this.customSliderButtons.querySelector('button[name="next"]');
+          this.previousButton.disabled = true;
+          if (this.element.viewer.sliderItems.length === 1) {
+            this.nextButton.disabled = true;
+          }
+          this.previousButton.addEventListener('click', () => {
+            const previousId = this.findPreviousId();
+            if (previousId) {
+              this.setActiveMedia.bind(this, previousId, false);
+              // Disable the previous button if there is no previous media after clicking
+              this.findPreviousId(previousId) ? null : (this.previousButton.disabled = true);
+            }
+          });
+
+          this.nextButton.addEventListener('click', () => {
+            const nextId = this.findNextId();
+            if (nextId) {
+              this.setActiveMedia.bind(this, nextId, false);
+              // Disable the next button if there is no next media after clicking
+              this.findNextId(nextId) ? null : (this.nextButton.disabled = true);
+            }
+          });
         }
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
+      }
+
+      findPreviousId(id = null) {
+        // check if there is another media before the passed mediaId
+        if (id) {
+          const activeMedia = this.elements.viewer.querySelector(`[data-media-id="${id}"]`);
+          if (!activeMedia) return;
+          const previousId = activeMedia.previousElementSibling?.dataset.mediaId;
+          if (previousId) {
+            return previousId;
+          } else {
+            return null;
+          }
+        }
+
+        // if no mediaId is passed, check if there is another media before the active media
+        const activeMedia = this.elements.viewer.querySelector('.slider__slide.is-active');
+        if (!activeMedia) return;
+        const previousId = activeMedia.previousElementSibling?.dataset.mediaId;
+        if (previousId) {
+          return previousId;
+        } else {
+          return null;
+        }
+      }
+
+      findNextId(id = null) {
+        // check if there is another media after the passed mediaId
+        if (id) {
+          const activeMedia = this.elements.viewer.querySelector(`[data-media-id="${id}"]`);
+          if (!activeMedia) return;
+          const nextId = activeMedia.nextElementSibling?.dataset.mediaId;
+          if (nextId) {
+            return nextId;
+          } else {
+            return null;
+          }
+        }
+
+        // if no mediaId is passed, check if there is another media after the active media
+        const activeMedia = this.elements.viewer.querySelector('.slider__slide.is-active');
+        if (!activeMedia) return;
+        const nextId = activeMedia.nextElementSibling?.dataset.mediaId;
+        if (nextId) {
+          return nextId;
+        } else {
+          return null;
+        }
       }
 
       onSlideChanged(event) {

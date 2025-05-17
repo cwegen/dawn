@@ -137,6 +137,8 @@ if (!customElements.get('media-gallery')) {
         const activeMedia =
           this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`) ||
           this.elements.viewer.querySelector('[data-media-id]');
+
+        console.log('Active media:', activeMedia);
         if (!activeMedia) {
           return;
         }
@@ -172,6 +174,7 @@ if (!customElements.get('media-gallery')) {
 
         if (!this.elements.thumbnails) return;
         const activeThumbnail = this.elements.thumbnails.querySelector(`[data-target="${mediaId}"]`);
+        console.log('Active thumbnail:', activeThumbnail);
         this.setActiveThumbnail(activeThumbnail);
         this.announceLiveRegion(activeMedia, activeThumbnail.dataset.mediaPosition);
       }

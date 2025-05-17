@@ -23,7 +23,6 @@ if (!customElements.get('media-gallery')) {
         });
 
         if (this.customSliderButtons) {
-          console.log('Custom slider buttons found');
           // init custom buttons
           this.previousButton = this.customSliderButtons.querySelector('button[name="previous"]');
           this.nextButton = this.customSliderButtons.querySelector('button[name="next"]');
@@ -33,50 +32,31 @@ if (!customElements.get('media-gallery')) {
           }
 
           this.previousButton.addEventListener('click', () => {
-            console.log('Previous button clicked');
             const previousId = this.findPreviousId();
-            console.log('Previous ID:', previousId);
             if (previousId) {
               this.setActiveMedia(previousId, false);
-              // Disable the previous button if there is no previous media after clicking
-              if (!this.findPreviousId(previousId)) {
-                this.previousButton.disabled = true;
-                console.log('No more previous media, disabling previous button');
-              }
             }
           });
 
           this.nextButton.addEventListener('click', () => {
-            console.log('Next button clicked');
             const nextId = this.findNextId();
-            console.log('Next ID:', nextId);
             if (nextId) {
               this.setActiveMedia(nextId, false);
-              // Disable the next button if there is no next media after clicking
-              if (!this.findNextId(nextId)) {
-                this.nextButton.disabled = true;
-                console.log('No more next media, disabling next button');
-              }
             }
           });
-        } else {
-          console.log('Custom slider buttons not found');
         }
+
         if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) {
-          console.log('Removing list semantic for desktop thumbnail layout');
           this.removeListSemantic();
         }
       }
 
       findPreviousId(id = null) {
-        console.log('findPreviousId called with id:', id);
         // check if there is another media before the passed mediaId
         if (id) {
           const activeMedia = this.elements.viewer.querySelector(`[data-media-id="${id}"]`);
-          console.log('Active media for previous:', activeMedia);
           if (!activeMedia) return;
           const previousId = activeMedia.previousElementSibling?.dataset.mediaId;
-          console.log('Previous sibling ID:', previousId);
           if (previousId) {
             return previousId;
           } else {
@@ -86,10 +66,8 @@ if (!customElements.get('media-gallery')) {
 
         // if no mediaId is passed, check if there is another media before the active media
         const activeMedia = this.elements.viewer.querySelector('.slider__slide.is-active');
-        console.log('Active media for previous (no id):', activeMedia);
         if (!activeMedia) return;
         const previousId = activeMedia.previousElementSibling?.dataset.mediaId;
-        console.log('Previous sibling ID (no id):', previousId);
         if (previousId) {
           return previousId;
         } else {
@@ -98,14 +76,11 @@ if (!customElements.get('media-gallery')) {
       }
 
       findNextId(id = null) {
-        console.log('findNextId called with id:', id);
         // check if there is another media after the passed mediaId
         if (id) {
           const activeMedia = this.elements.viewer.querySelector(`[data-media-id="${id}"]`);
-          console.log('Active media for next:', activeMedia);
           if (!activeMedia) return;
           const nextId = activeMedia.nextElementSibling?.dataset.mediaId;
-          console.log('Next sibling ID:', nextId);
           if (nextId) {
             return nextId;
           } else {
@@ -115,10 +90,8 @@ if (!customElements.get('media-gallery')) {
 
         // if no mediaId is passed, check if there is another media after the active media
         const activeMedia = this.elements.viewer.querySelector('.slider__slide.is-active');
-        console.log('Active media for next (no id):', activeMedia);
         if (!activeMedia) return;
         const nextId = activeMedia.nextElementSibling?.dataset.mediaId;
-        console.log('Next sibling ID (no id):', nextId);
         if (nextId) {
           return nextId;
         } else {
@@ -138,10 +111,16 @@ if (!customElements.get('media-gallery')) {
           this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`) ||
           this.elements.viewer.querySelector('[data-media-id]');
 
-        console.log('Active media:', activeMedia);
         if (!activeMedia) {
           return;
         }
+
+        // Handle the previous and next buttons state
+        const prevMedia = this.findPreviousId(mediaId);
+        const nextMedia = this.findNextId(mediaId);
+        this.previousButton && prevMedia ? null : (this.previousButton.disabled = false);
+        this.nextButton && nextMedia ? null : (this.nextButton.disabled = false);
+
         this.elements.viewer.querySelectorAll('[data-media-id]').forEach((element) => {
           element.classList.remove('is-active');
         });
@@ -174,7 +153,6 @@ if (!customElements.get('media-gallery')) {
 
         if (!this.elements.thumbnails) return;
         const activeThumbnail = this.elements.thumbnails.querySelector(`[data-target="${mediaId}"]`);
-        console.log('Active thumbnail:', activeThumbnail);
         this.setActiveThumbnail(activeThumbnail);
         this.announceLiveRegion(activeMedia, activeThumbnail.dataset.mediaPosition);
       }

@@ -10,6 +10,9 @@ if (!customElements.get('media-gallery')) {
           thumbnails: this.querySelector('[id^="GalleryThumbnails"]'),
         };
         this.mql = window.matchMedia('(min-width: 750px)');
+
+        this.customSliderButtons = this.querySelector('.js-slider-buttons');
+
         if (!this.elements.thumbnails) return;
 
         this.elements.viewer.addEventListener('slideChanged', debounce(this.onSlideChanged.bind(this), 500));
@@ -18,7 +21,82 @@ if (!customElements.get('media-gallery')) {
             .querySelector('button')
             .addEventListener('click', this.setActiveMedia.bind(this, mediaToSwitch.dataset.target, false));
         });
-        if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) this.removeListSemantic();
+
+        if (this.customSliderButtons) {
+          // init custom buttons
+          this.previousButton = this.customSliderButtons.querySelector('button[name="previous"]');
+          this.nextButton = this.customSliderButtons.querySelector('button[name="next"]');
+          this.previousButton.setAttribute('disabled', 'disabled');
+          if (this.elements.viewer.sliderItems.length === 1) {
+            this.nextButton.setAttribute('disabled', 'disabled');
+          }
+
+          this.previousButton.addEventListener('click', () => {
+            const previousId = this.findPreviousId();
+            if (previousId) {
+              this.setActiveMedia(previousId, false);
+            }
+          });
+
+          this.nextButton.addEventListener('click', () => {
+            const nextId = this.findNextId();
+            if (nextId) {
+              this.setActiveMedia(nextId, false);
+            }
+          });
+        }
+
+        if (this.dataset.desktopLayout.includes('thumbnail') && this.mql.matches) {
+          this.removeListSemantic();
+        }
+      }
+
+      findPreviousId(id = null) {
+        // check if there is another media before the passed mediaId
+        if (id) {
+          const activeMedia = this.elements.viewer.querySelector(`[data-media-id="${id}"]`);
+          if (!activeMedia) return;
+          const previousId = activeMedia.previousElementSibling?.dataset.mediaId;
+          if (previousId) {
+            return previousId;
+          } else {
+            return null;
+          }
+        }
+
+        // if no mediaId is passed, check if there is another media before the active media
+        const activeMedia = this.elements.viewer.querySelector('.slider__slide.is-active');
+        if (!activeMedia) return;
+        const previousId = activeMedia.previousElementSibling?.dataset.mediaId;
+        if (previousId) {
+          return previousId;
+        } else {
+          return null;
+        }
+      }
+
+      findNextId(id = null) {
+        // check if there is another media after the passed mediaId
+        if (id) {
+          const activeMedia = this.elements.viewer.querySelector(`[data-media-id="${id}"]`);
+          if (!activeMedia) return;
+          const nextId = activeMedia.nextElementSibling?.dataset.mediaId;
+          if (nextId) {
+            return nextId;
+          } else {
+            return null;
+          }
+        }
+
+        // if no mediaId is passed, check if there is another media after the active media
+        const activeMedia = this.elements.viewer.querySelector('.slider__slide.is-active');
+        if (!activeMedia) return;
+        const nextId = activeMedia.nextElementSibling?.dataset.mediaId;
+        if (nextId) {
+          return nextId;
+        } else {
+          return null;
+        }
       }
 
       onSlideChanged(event) {
@@ -32,9 +110,21 @@ if (!customElements.get('media-gallery')) {
         const activeMedia =
           this.elements.viewer.querySelector(`[data-media-id="${mediaId}"]`) ||
           this.elements.viewer.querySelector('[data-media-id]');
+
         if (!activeMedia) {
           return;
         }
+
+        // Handle the previous and next buttons state
+        const prevMedia = this.findPreviousId(mediaId);
+        const nextMedia = this.findNextId(mediaId);
+        this.previousButton && prevMedia
+          ? this.previousButton.removeAttribute('disabled')
+          : this.previousButton.setAttribute('disabled', 'disabled');
+        this.nextButton && nextMedia
+          ? this.nextButton.removeAttribute('disabled')
+          : this.nextButton.setAttribute('disabled', 'disabled');
+
         this.elements.viewer.querySelectorAll('[data-media-id]').forEach((element) => {
           element.classList.remove('is-active');
         });
@@ -45,7 +135,8 @@ if (!customElements.get('media-gallery')) {
 
           if (this.elements.thumbnails) {
             const activeThumbnail = this.elements.thumbnails.querySelector(`[data-target="${mediaId}"]`);
-            activeThumbnail.parentElement.firstChild !== activeThumbnail && activeThumbnail.parentElement.prepend(activeThumbnail);
+            activeThumbnail.parentElement.firstChild !== activeThumbnail &&
+              activeThumbnail.parentElement.prepend(activeThumbnail);
           }
 
           if (this.elements.viewer.slider) this.elements.viewer.resetPages();

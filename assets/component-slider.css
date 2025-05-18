@@ -39,9 +39,12 @@ slider-component.slider-component-full-width {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    scroll-padding-left: 1.5rem;
+    /* scroll-padding-left: 1.5rem; */
     -webkit-overflow-scrolling: touch;
-    margin-bottom: 1rem;
+    margin-bottom: 8px;
+    /* margin-left: 1.5rem; */
+    margin-left: 0 !important;
+    gap: 7px;
   }
 
   /* Fix to show some space at the end of our sliders in all browsers */
@@ -70,11 +73,13 @@ slider-component.slider-component-full-width {
   .slider.slider--tablet-up {
     position: relative;
     flex-wrap: inherit;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
     scroll-padding-left: 1rem;
     -webkit-overflow-scrolling: touch;
+    flex-direction: column;
+    margin-right: 20px;
   }
 
   .slider.slider--tablet-up .slider__slide {
@@ -333,26 +338,34 @@ slider-component.slider-component-full-width {
   .slider--mobile + .slider-buttons {
     display: none;
   }
+
+  .slider-buttons {
+    position: absolute;
+    bottom: -28px;
+    left: calc(50% + 21px);
+    gap: 12px;
+  }
 }
 
 .slider-button {
-  color: rgba(var(--color-foreground), 0.75);
+  color: rgb(var(--color-foreground));
   background: transparent;
   border: none;
   cursor: pointer;
-  width: 44px;
-  height: 44px;
+  width: 23px;
+  height: 23px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .slider-button:not([disabled]):hover {
-  color: rgb(var(--color-foreground));
+  color: rgb(var(--color-secondary-button-text));
 }
 
 .slider-button .icon {
-  height: 0.6rem;
+  height: 8px;
 }
 
 .slider-button[disabled] .icon {
